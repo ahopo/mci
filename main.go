@@ -1,5 +1,7 @@
 package main
 
-func main() {
+import "mci/cli"
 
+func main() {
+	cli.Init()
 }
