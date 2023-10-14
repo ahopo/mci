@@ -6,14 +6,14 @@ package ec2
 import (
 	"context"
 	"flag"
-	"fmt"
+	"fmt" 
 	uaws "mci/common/util/aws"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws" 
 	"github.com/aws/aws-sdk-go-v2/service/ec2"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
+ 
 func CreateInstanceCmd() {
 	name := flag.String("n", "", "The name of the tag to attach to the instance")
 	value := flag.String("v", "", "The value of the tag to attach to the instance")
@@ -22,8 +22,9 @@ func CreateInstanceCmd() {
 	if *name == "" || *value == "" {
 		fmt.Println("You must supply a name and value for the tag (-n NAME -v VALUE)")
 		return
-	}
+	} 
 	ec2model := uaws.Init()
+ 
 
 	// Create separate values if required.
 	minMaxCount := int32(1)
@@ -35,7 +36,9 @@ func CreateInstanceCmd() {
 		MaxCount:     &minMaxCount,
 	}
 
+ 
 	result, err := uaws.MakeInstance(context.TODO(), ec2model.Ec2Client(), input)
+ 
 	if err != nil {
 		fmt.Println("Got an error creating an instance:")
 		fmt.Println(err)
@@ -52,7 +55,9 @@ func CreateInstanceCmd() {
 		},
 	}
 
+ 
 	_, err = uaws.MakeTags(context.TODO(), ec2model.Ec2Client(), tagInput)
+ 
 	if err != nil {
 		fmt.Println("Got an error tagging the instance:")
 		fmt.Println(err)
